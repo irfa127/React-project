@@ -459,3 +459,52 @@ export const flightDetailsData = [
     taxes: "₹1100",
   }
 ];
+
+
+export  const routes = [
+    {
+      id: 1,
+      from: "Mumbai",
+      to: "Delhi",
+      flights: 24,
+      price: "₹3,999",
+    },
+    {
+      id: 2,
+      from: "Delhi",
+      to: "Bangalore",
+      flights: 18,
+      price: "₹4,100",
+    },
+    {
+      id: 3,
+      from: "Mumbai",
+      to: "Kolkata",
+      flights: 12,
+      price: "₹5,200",
+    },
+    {
+      id: 4,
+      from: "Mumbai",
+      to: "Goa",
+      flights: 20,
+      price: "₹2,999",
+    },
+    {
+      id: 5,
+      from: "Delhi",
+      to: "Hyderabad",
+      flights: 15,
+      price: "₹3,799",
+    },
+    {
+      id: 6,
+      from: "Bangalore",
+      to: "Mumbai",
+      flights: 22,
+      price: "₹3,500",
+    },
+  ];
+
+
+  

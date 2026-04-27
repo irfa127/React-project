@@ -1,137 +1,98 @@
-import React, { useState, useRef, useEffect } from "react";
+import React, { useState } from "react";
 import { IoMdArrowDropdownCircle } from "react-icons/io";
-import { useNavigate } from "react-router-dom";
 
 const airports = [
-  {
-    id: 1,
-    name: "Chhatrapati Shivaji Maharaj International Airport",
-    city: "Mumbai, India",
-    code: "BOM",
-  },
-  {
-    id: 2,
-    name: "Indira Gandhi International Airport",
-    city: "Delhi, India",
-    code: "DEL",
-  },
-  {
-    id: 3,
-    name: "Kempegowda International Airport",
-    city: "Bangalore, India",
-    code: "BLR",
-  },
-  {
-    id: 4,
-    name: "Chennai International Airport",
-    city: "Chennai, India",
-    code: "MAA",
-  },
+  { id: 1, name: "Chennai International Airport", city: "Chennai", code: "MAA" },
+  { id: 2, name: "Indira Gandhi International Airport", city: "Delhi", code: "DEL" },
+  { id: 3, name: "Chhatrapati Shivaji Maharaj International Airport", city: "Mumbai", code: "BOM" },
+  { id: 4, name: "Kempegowda International Airport", city: "Bangalore", code: "BLR" },
 ];
 
-const Input = ({ type }) => {
-  const navigate = useNavigate();
-
+const FlightSearchInput = ({ label, value, setValue }) => {
   const [open, setOpen] = useState(false);
-  const [value, setValue] = useState("");
 
-  const wrapperRef = useRef(null);
+  const search = (value || "").toLowerCase();
 
-  useEffect(() => {
-    const close = (e) => {
-      if (
-        wrapperRef.current &&
-        !wrapperRef.current.contains(e.target)
-      ) {
-        setOpen(false);
-      }
-    };
+  const filteredAirports = airports.filter((item) => {
+    const name = (item.name || "").toLowerCase();
+    const city = (item.city || "").toLowerCase();
+    const code = (item.code || "").toLowerCase();
 
-    document.addEventListener("mousedown", close);
-
-    return () =>
-      document.removeEventListener("mousedown", close);
-  }, []);
-
-  const filteredAirports = airports.filter(
-    (item) =>
-      item.name.toLowerCase().includes(value.toLowerCase()) ||
-      item.city.toLowerCase().includes(value.toLowerCase()) ||
-      item.code.toLowerCase().includes(value.toLowerCase())
-  );
-
+    return (
+      name.includes(search) ||
+      city.includes(search) ||
+      code.includes(search)
+    );
+  });
 
   const handleSelect = (airport) => {
-    setValue(`${airport.name} (${airport.code})`);
+    setValue(`${airport.city} (${airport.code})`);
     setOpen(false);
   };
 
-
-  const handleSearch = () => {
-    const found = airports.find(
-      (item) =>
-        value.includes(item.code) ||
-        value.toLowerCase().includes(item.name.toLowerCase())
-    );
-
-    if (found) {
-      navigate(`/airlines/${found.id}`);
-    }
-  };
-
   return (
-    <div className="relative w-full max-w-md" ref={wrapperRef}>
-      <label className="text-lg font-semibold mb-2 block">
-        {type}
+    <div className="relative w-full">
+
+      {/* Label */}
+      <label className="block text-sm font-semibold mb-2 text-gray-600">
+        {label}
       </label>
 
+      {/* Input */}
       <div className="relative">
         <input
           type="text"
-          value={value}
-          placeholder={`Select ${type}`}
+          value={value || ""}
           onChange={(e) => {
             setValue(e.target.value);
             setOpen(true);
           }}
           onFocus={() => setOpen(true)}
-          className="w-full border px-4 py-3 rounded-xl"
+          placeholder={`Search ${label}`}
+          className="w-full border px-4 py-3 rounded-xl outline-none focus:border-blue-500"
         />
 
-    
         <IoMdArrowDropdownCircle
-          onClick={handleSearch}
-          className="absolute right-4 top-1/2 -translate-y-1/2 text-2xl text-blue-500 cursor-pointer hover:scale-110 transition"
+          onClick={() => setOpen(!open)}
+          className="absolute right-3 top-1/2 -translate-y-1/2 text-2xl text-blue-500 cursor-pointer"
         />
       </div>
 
-  
+      {/* Dropdown */}
       {open && (
-        <div className="absolute w-full bg-white shadow-xl rounded-xl mt-2 z-50 max-h-72 overflow-y-auto">
-          {filteredAirports.map((airport) => (
-            <div
-              key={airport.id}
-              onMouseDown={() => handleSelect(airport)}
-              className="px-4 py-3 hover:bg-blue-50 cursor-pointer flex justify-between"
-            >
-              <div>
-                <p className="font-semibold text-sm">
-                  {airport.name}
-                </p>
-                <p className="text-xs text-gray-500">
-                  {airport.city}
-                </p>
-              </div>
+        <div className="absolute z-50 w-full bg-white shadow-lg rounded-xl mt-2 max-h-60 overflow-y-auto">
 
-              <span className="bg-gray-100 px-2 py-1 rounded text-xs font-bold">
-                {airport.code}
-              </span>
+          {filteredAirports.length > 0 ? (
+            filteredAirports.map((airport) => (
+              <div
+                key={airport.id}
+                onMouseDown={() => handleSelect(airport)}
+                className="px-4 py-3 hover:bg-blue-50 cursor-pointer flex justify-between"
+              >
+                <div>
+                  <p className="font-medium text-sm">
+                    {airport.city}
+                  </p>
+                  <p className="text-xs text-gray-500">
+                    {airport.name}
+                  </p>
+                </div>
+
+                <span className="text-xs font-bold bg-gray-100 px-2 py-1 rounded">
+                  {airport.code}
+                </span>
+              </div>
+            ))
+          ) : (
+            <div className="p-3 text-sm text-gray-400">
+              No airports found
             </div>
-          ))}
+          )}
+
         </div>
       )}
     </div>
   );
 };
 
-export default Input;
+export default FlightSearchInput;
