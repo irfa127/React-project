@@ -6,7 +6,7 @@ import {
   FaShieldAlt,
   FaInfoCircle,
   FaStar,
-  FaCheckCircle
+  FaCheckCircle,
 } from "react-icons/fa";
 
 import { useParams, NavLink } from "react-router-dom";
@@ -17,6 +17,10 @@ const FlightDetails = () => {
 
   const flight =
     flightDetailsData.find((f) => f.id === Number(id)) || flightDetailsData[0];
+
+  const total =
+    Number(flight.price.replace(/[₹,]/g, "")) +
+    Number(flight.taxes.replace(/[₹,]/g, ""));
 
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
@@ -70,7 +74,6 @@ const FlightDetails = () => {
             </div>
           </div>
 
-       
           <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-4">
             <div className="bg-white p-5 rounded-xl shadow flex items-center gap-3">
               <FaSuitcaseRolling className="text-blue-500" />
@@ -123,7 +126,7 @@ const FlightDetails = () => {
 
           <div className="flex justify-between font-bold text-lg">
             <p>Total</p>
-            <p>{flight.price}</p>
+            <p>{total}</p>
           </div>
 
           <NavLink to={`/passenger/${id}`}>

@@ -49,7 +49,7 @@ const FlightCard = () => {
 
           <p className="text-gray-400 text-xs">+ {flight.taxes}</p>
 
-          <NavLink to={`/mybookings/${id}`}>
+          <NavLink to={`/selected/${id}`}>
             <button className="bg-blue-500 hover:bg-blue-600 text-white px-5 py-2 rounded-lg mt-3 transition w-full lg:w-auto">
               Select
             </button>

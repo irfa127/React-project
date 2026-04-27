@@ -52,7 +52,6 @@ const ConfirmBookings = () => {
   
       <div className="w-full bg-gradient-to-r from-blue-500 to-blue-700 text-white px-8 md:px-20 py-10">
         <div className="flex flex-col md:flex-row items-center gap-6">
-     
           <div className="bg-white text-blue-700 w-20 h-20 rounded-2xl flex items-center justify-center font-bold text-2xl shadow-lg">
             {flight.from}
           </div>
@@ -71,7 +70,7 @@ const ConfirmBookings = () => {
       </div>
 
     
-      <div className="max-w-7xl mx-auto px-6 py-8">
+      <div className="max-w-7xl mx-auto px-6 py-8 mb-30">
         <FlightDetails />
       </div>
       <div className="max-w-7xl mx-auto px-6 pb-10 space-y-8 relative bottom-158">
@@ -103,7 +102,7 @@ const ConfirmBookings = () => {
         </div>
 
       
-        <div className="bg-white p-6 rounded-2xl shadow">
+        <div className="bg-white p-6 rounded-2xl shadow relative bottom-3">
           <h2 className="text-gray-500 font-semibold mb-6 text-lg">
             CANCELLATION POLICY
           </h2>

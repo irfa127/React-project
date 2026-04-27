@@ -8,7 +8,7 @@ import ConfirmBookings from '../Pages/ConfirmBooking/ConfirmBooking';
 import Passenger from '../Pages/Payment/Passenger'
 import Payment from '../Pages/ConfirmPayment'
 import BookingSuccess from '../Pages/BookingSucces';
-import Results from '../Pages/Results';
+
 
 
 
@@ -20,7 +20,7 @@ const router = createBrowserRouter([
         {index:true , Component:Home},
         {path:"airlines/:id" , Component:FlightBookings_Detail},
         {path:"passenger/:id" , Component:Passenger},
-        {path:"mybookings/:id" , Component:ConfirmBookings},
+        {path:"selected/:id" , Component:ConfirmBookings},
         {path:"mybookings/" , Component:MyBookings},
         { path: "payment/:id", Component: Payment },
        

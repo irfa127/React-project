@@ -2,8 +2,6 @@ import React from "react";
 import {airLine} from "../../data/data";
 
 const AirlineHeader = ({id}) => {
-
-  
    const data = airLine.find(i => i.id == id) || airLine[0];
     // console.log(data)
   return (

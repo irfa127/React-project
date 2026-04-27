@@ -5,21 +5,21 @@ import {
   FaPhone,
   FaLock,
   FaBirthdayCake,
+  FaArrowAltCircleDown,
 } from "react-icons/fa";
 import { NavLink, useParams } from "react-router-dom";
 import { flightDetailsData } from "../../data/data";
 import SwitchAirline from "./SwitchAirline";
+import { RiFlightTakeoffLine } from "react-icons/ri";
 
 const PassengerForm = () => {
   const [gender, setGender] = useState("Male");
   const { id } = useParams();
 
-  // Selected Flight
   const flight =
     flightDetailsData.find((item) => item.id === Number(id)) ||
     flightDetailsData[0];
 
-  // Price Calculation
   const baseFare = Number(flight.price.replace(/[₹,]/g, ""));
   const taxes = Number(flight.taxes.replace(/[₹,]/g, ""));
   const seatCharge = 0;
@@ -29,9 +29,7 @@ const PassengerForm = () => {
   return (
     <div className="p-6 bg-gray-100 min-h-screen">
       <div className="max-w-7xl mx-auto grid grid-cols-1 lg:grid-cols-3 gap-6">
-       
         <div className="lg:col-span-2 bg-white p-8 rounded-2xl shadow-md space-y-8">
-       
           <div>
             <h2 className="text-3xl font-bold text-gray-800">
               Passenger Details
@@ -41,7 +39,6 @@ const PassengerForm = () => {
             </p>
           </div>
 
-        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="text-sm font-medium text-gray-500">
@@ -76,7 +73,6 @@ const PassengerForm = () => {
             </div>
           </div>
 
-        
           <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
             <div>
               <label className="text-sm font-medium text-gray-500">
@@ -113,7 +109,6 @@ const PassengerForm = () => {
             </div>
           </div>
 
-     
           <div>
             <label className="text-sm font-medium text-gray-500 block mb-3">
               GENDER
@@ -137,7 +132,6 @@ const PassengerForm = () => {
             </div>
           </div>
 
-         
           <div className="bg-yellow-50 border border-yellow-300 text-yellow-700 p-4 rounded-xl">
             Please verify passenger name exactly as per ID proof.
           </div>
@@ -176,10 +170,10 @@ const PassengerForm = () => {
             1 passenger · all inclusive
           </p>
 
-     
           <NavLink to={`/payment/${id}`}>
             <button className="w-full mt-6 bg-blue-600 hover:bg-blue-700 text-white py-3 rounded-xl font-semibold transition">
-              Proceed to Payment →
+              Proceed to Payment{" "}
+              <RiFlightTakeoffLine className="text-2xl ml-65 relative bottom-5" />
             </button>
           </NavLink>
 
@@ -190,7 +184,6 @@ const PassengerForm = () => {
         </div>
       </div>
 
-   
       <SwitchAirline />
     </div>
   );
