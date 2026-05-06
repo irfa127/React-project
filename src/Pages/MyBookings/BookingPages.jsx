@@ -10,19 +10,30 @@ const BookingsPage = () => {
   const [searchQuery, setSearchQuery] = useState("");
 
   useEffect(() => {
-    const storedBookings =
-      JSON.parse(localStorage.getItem("myBookings")) || [];
-
-    setBookings(storedBookings);
+    const fetchBookings = async () => {
+      try {
+        const response = await fetch("http://localhost:8000/api/bookings");
+        const data = await response.json();
+        if (data.success) {
+          setBookings(data.data);
+        }
+      } catch (error) {
+        console.error("Error fetching bookings:", error);
+      }
+    };
+    fetchBookings();
   }, []);
 
   // Handle Cancel Booking
-  const handleCancel = (bookingId) => {
-    const updatedBookings = bookings.map((b) =>
-      b.id === bookingId ? { ...b, status: "Cancelled" } : b
-    );
-    setBookings(updatedBookings);
-    localStorage.setItem("myBookings", JSON.stringify(updatedBookings));
+  const handleCancel = async (bookingId) => {
+    try {
+      await fetch(`http://localhost:8000/api/bookings/${bookingId}`, {
+        method: "DELETE",
+      });
+      setBookings(bookings.filter((b) => b._id !== bookingId));
+    } catch (error) {
+      console.error("Error cancelling booking:", error);
+    }
   };
 
 

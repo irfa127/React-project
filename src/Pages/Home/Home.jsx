@@ -26,10 +26,10 @@ const Home = () => {
   return (
     <div className="overflow-x-hidden bg-white">
 
-      {/* ================= HERO SECTION ================= */}
+     
       <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
 
-        {/* Background Video */}
+      
         <video
           className="absolute inset-0 w-full h-full object-cover"
           autoPlay
@@ -40,17 +40,16 @@ const Home = () => {
           <source src={Video} type="video/mp4" />
         </video>
 
-        {/* Dark overlay */}
         <div className="absolute inset-0 bg-black/50"></div>
 
-        {/* Glass Card Container */}
+ 
         <div className="relative z-10 w-[92%] md:w-[80%] lg:w-[70%] 
                         bg-white/10 backdrop-blur-xl 
                         border border-white/20 
                         rounded-3xl shadow-2xl 
                         p-8 md:p-12 text-center text-white">
 
-          {/* Text */}
+      
           <h1 className="text-4xl md:text-6xl font-bold">
             Fly Smarter
           </h1>
@@ -63,7 +62,7 @@ const Home = () => {
             Compare flights from 500+ airlines. Find the best prices with zero hidden fees.
           </p>
 
-          {/* ================= SEARCH BOX ================= */}
+        
           <div className="mt-10 bg-white rounded-2xl shadow-xl p-6 text-black">
 
             <div className="grid grid-cols-1 md:grid-cols-3 gap-6 items-center">
@@ -129,12 +128,12 @@ const Home = () => {
         </div>
       </section>
 
-      {/* ================= AIRLINES ================= */}
+    
       <section className="py-20 px-6 md:px-12">
         <Airline />
       </section>
 
-      {/* ================= POPULAR ROUTES ================= */}
+   
       <section className="py-20 bg-gray-50 px-6 md:px-12">
 
         <div className="text-center mb-14">
@@ -150,7 +149,7 @@ const Home = () => {
         <Popular />
       </section>
 
-      {/* ================= ABOUT ================= */}
+   
       <section className="py-20 px-6 md:px-12">
         <About />
       </section>
